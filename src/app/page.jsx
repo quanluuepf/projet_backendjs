@@ -23,7 +23,7 @@ export default function Home() {
         <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <div>
          
-          <h2>Liste des compétences </h2>
+          <h1>Liste des compétences </h1>
           <ul>
               {skills.map((skill) => (
                 <li key={skill.id}>
@@ -32,9 +32,7 @@ export default function Home() {
                 </button>
               </li>
              ))}
-      </ul>
-            
-          
+        </ul>         
         </div>
         </main>
       </main>

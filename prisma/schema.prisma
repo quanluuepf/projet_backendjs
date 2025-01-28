@@ -13,43 +13,13 @@ datasource db {
   url      = "file:./dev.db"
 }
 
-model User {
-  id          Int        @id 
-  email       String     @unique
-  name        String
-  difficulty  String
-  skills      UserSkill[] // Relation avec les compétences
-  goals       Goal[]     // Relation avec les objectifs
-}
-
-model Skill {
-  id          Int        @id @default(autoincrement())
-  name        String     @unique // Le nom de la compétence
-  users       UserSkill[] // Relation avec la table pivot UserSkill
-  goals       Goal[]     // Relation avec les objectifs
-}
-
-model UserSkill {
-  id      Int    @id 
-  userId  Int
-  skillId Int
-  level   String // Niveau de compétence
-  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  skill   Skill  @relation(fields: [skillId], references: [id], onDelete: Cascade)
-
-  @@unique([userId, skillId]) // Empêche les doublons dans la relation
-}
 
 model Goal {
   id        Int     @id @default(autoincrement())
-  level  String // Add this field to the model
-  userId    Int     // L'utilisateur à qui appartient cet objectif
-  skillId   Int     // La compétence liée à cet objectif
-  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  skill     Skill   @relation(fields: [skillId], references: [id], onDelete: Cascade)
-  
+  name String @unique
+  description String
+  level  String // Add this field to the model 
   createdAt DateTime @default(now()) // Date de création de l'objectif
   updatedAt DateTime @updatedAt // Date de mise à jour
 
-  @@unique([userId, skillId]) // Un utilisateur ne peut avoir qu'un seul objectif par compétence
 }

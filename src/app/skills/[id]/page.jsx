@@ -1,12 +1,15 @@
 'use client'
-export default function SkillPage ({params}){
+
+import GoalForm from "./GoalForm";
+
+export default function SkillPage ({ params }) {
   
-  const {id} = params; 
+  const { id } = params; 
   return (
     <div>
       <h1>{id}</h1>
       <h1>Voici les objectifs de la compétences</h1>
-      
+      <GoalForm />
     </div>
   );
 
