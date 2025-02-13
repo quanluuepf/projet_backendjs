@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from "react"
-import { addGoal } from "../../goal/goal"
+import { addGoal } from "../app/goal/goal"
 
 export default function GoalForm() {
     const [name, setName] = useState('')

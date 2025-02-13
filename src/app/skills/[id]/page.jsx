@@ -1,8 +1,8 @@
 'use client'
 
-import GoalForm from "./GoalForm";
+import GoalForm from "../../../components/GoalForm";
 
-export default function SkillPage ({ params }) {
+export default function SkillPage (params) {
   
   const { id } = params; 
   return (
@@ -13,5 +13,5 @@ export default function SkillPage ({ params }) {
     </div>
   );
 
-};
+}
 
