@@ -13,7 +13,7 @@ export default function GoalForm() {
         formData.append('name', name);
         formData.append('description', description);
         formData.append('level', level);
-        const res = await fetch('@/api/addGoal', {
+        const res = await fetch('/api/addGoal', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json', // Ajoute cette ligne !
