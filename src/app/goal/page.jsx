@@ -1,14 +1,17 @@
-import { Prisma } from "@prisma/client"
+import prisma from "@/lib/prisma"; 
+import StudentList from "@/components/StudentList";
+import AddStudentForm from "@/components/AddStudentForm";
 
 export default async function StudentsPage() {
-    // Accès direct DB sans API
-    const students = await Prisma.student.findMany()
+    // Récupération des étudiants depuis la base de données
+    const students = await prisma.student.findMany();
+
     return (
-    <main>
-    <h1>Liste des Étudiants</h1>
-    {/* Passe les données au client */}
-    <StudentList students={students} />
-    <AddStudentForm />
-    </main>
-    )
-    }
+        <main>
+            <h1>Liste des Étudiants</h1>
+            {/* Passe les données au client */}
+            <StudentList students={students} />
+            <AddStudentForm />
+        </main>
+    );
+}
