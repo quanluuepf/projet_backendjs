@@ -1,36 +1,31 @@
-'use server';
+"use client";
 
-import prisma from '@/lib/prisma'; 
-import { revalidatePath } from "next/cache";
+import { useState } from "react";
 
-export async function addGoal({ formData }) {
-    try {
-        
+export default function GoalForm() {
+    const [message, setMessage] = useState("");
 
-        if (!data.name || !data.description || !data.level) {
-            throw new Error("Tous les champs sont obligatoires.");
-        }
+    async function handleSubmit(event) {
+        event.preventDefault();
 
-        console.log("Prisma instance:", prisma);
-        console.log("Prisma student model:", prisma.student);
-        
-        const data = Object.fromEntries(formData);
-        console.log("Données reçues :", data);
+        const formData = new FormData(event.target);
 
-        await prisma.student.create({
-            data: {
-                name: data.name,
-                description: data.description,
-                level: data.level,
-                createdAt: new Date(),
-                updatedAt: new Date(),
-            },
+        const response = await fetch("./api/addGoal", { // Vérifie bien la route
+            method: "POST",
+            body: formData,
         });
 
-        revalidatePath('/goal');
-        return { success: true, message: "Goal ajouté avec succès !" };
-    } catch (error) {
-        console.error("Erreur lors de l'ajout du goal :", error);
-        return { success: false, message: error.message || "Une erreur s'est produite." };
+        const result = await response.json();
+        setMessage(result.message);
     }
+
+    return (
+        <form id="myForm" onSubmit={handleSubmit}>
+            <input type="text" name="name" placeholder="Nom du goal" required />
+            <input type="text" name="description" placeholder="Description" required />
+            <input type="text" name="level" placeholder="Niveau" required />
+            <button type="submit">Ajouter</button>
+            {message && <p>{message}</p>}
+        </form>
+    );
 }

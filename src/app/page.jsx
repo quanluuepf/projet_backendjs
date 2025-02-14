@@ -1,9 +1,9 @@
-'use client';
+'use client'; // Ajoute cette directive en haut du fichier
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
-  // Définition d'une liste de compétences
   const [skills, setSkills] = useState([
     { id: 'javascript', name: 'JavaScript' },
     { id: 'python', name: 'Python' },
@@ -15,6 +15,7 @@ export default function Home() {
   const router = useRouter();
 
   const handleNavigation = (id) => {
+    console.log(`Navigating to /skills/${id}`); // Ajoute cette ligne pour déboguer
     router.push(`/skills/${id}`);
   };
 
